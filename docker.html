@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Docker Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #2C3E50;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #34495E;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+            color: #F1C40F;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #ECF0F1; /* Set label text color */
+        }
+        input[type="text"], input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 20px;
+            border: 1px solid #ECF0F1;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            background: #F1C40F;
+            color: #ECF0F1;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background: #D4AC0D;
+        }
+        .message {
+            text-align: center;
+            color: #2ECC71;
+            margin-top: -15px;
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Docker Management</h1>
+
+        <form id="dockerImgPullForm" action="/docker_image_pull" method="post">
+            <label for="image">Docker Image:</label>
+            <input type="text" id="image" name="image" required>
+            <input type="submit" value="Pull Docker Image">
+            {% if pull_message %}
+            <div class="message">{{ pull_message }}</div>
+            {% endif %}
+        </form>
+
+        <form id="dockerLaunchForm" action="/launch_docker" method="post">
+            <label for="container_name">Container Name:</label>
+            <input type="text" id="container_name" name="container_name" required>
+            <label for="image">Docker Image:</label>
+            <input type="text" id="image" name="image" required>
+            <input type="submit" value="Launch Docker Container">
+            {% if launch_message %}
+            <div class="message">{{ launch_message }}</div>
+            {% endif %}
+        </form>
+
+        <form id="dockerStopForm" action="/docker_stop" method="post">
+            <label for="container_name">Container Name:</label>
+            <input type="text" id="container_name" name="container_name" required>
+            <input type="submit" value="Stop Docker Container">
+            {% if stop_message %}
+            <div class="message">{{ stop_message }}</div>
+            {% endif %}
+        </form>
+
+        <form id="dockerStartForm" action="/docker_start" method="post">
+            <label for="container_name">Container Name:</label>
+            <input type="text" id="container_name" name="container_name" required>
+            <input type="submit" value="Start Docker Container">
+            {% if start_message %}
+            <div class="message">{{ start_message }}</div>
+            {% endif %}
+        </form>
+
+        <form id="dockerStatusForm" action="/docker_status" method="post">
+            <label for="container_name">Container Name:</label>
+            <input type="text" id="container_name" name="container_name" required>
+            <input type="submit" value="Get Docker Container Status">
+            {% if status_message %}
+            <div class="message">{{ status_message }}</div>
+            {% endif %}
+        </form>
+
+        <form id="dockerRemoveForm" action="/docker_remove" method="post">
+            <label for="container_name">Container Name:</label>
+            <input type="text" id="container_name" name="container_name" required>
+            <input type="submit" value="Remove Docker Container">
+            {% if remove_message %}
+            <div class="message">{{ remove_message }}</div>
+            {% endif %}
+        </form>
+
+        <form id="dockerLogsForm" action="/docker_logs" method="post">
+            <label for="container_name">Container Name:</label>
+            <input type="text" id="container_name" name="container_name" required>
+            <input type="submit" value="Get Docker Container Logs">
+            {% if logs_message %}
+            <div class="message">{{ logs_message }}</div>
+            {% endif %}
+        </form>
+
+        <form id="dockerImgRemoveForm" action="/docker_image_remove" method="post">
+            <label for="image">Docker Image:</label>
+            <input type="text" id="image" name="image" required>
+            <input type="submit" value="Remove Docker Image">
+            {% if img_remove_message %}
+            <div class="message">{{ img_remove_message }}</div>
+            {% endif %}
+        </form>
+    </div>
+</body>
+</html>
